@@ -105,8 +105,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 user.setAdress(name.getString("inslibellevoie"));
                 user.setCodepostal(name.getString("inscodepostal"));
                 user.setVille(name.getString("comlib"));
-                user.setLat(50.0);
-                user.setLon(3.0);
+                JSONArray jsonGEO = name.getJSONArray("geo");
+                user.setLat(jsonGEO.getDouble(0));
+                user.setLon(jsonGEO.getDouble(1));
                 //ajout de l'utilisateur à la liste
                 list.add(user);
 
@@ -127,6 +128,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         FormIntent.putExtra("Adresse",vuser.getAdress());
         FormIntent.putExtra("CodePostal",vuser.getCodepostal());
         FormIntent.putExtra("Ville",vuser.getVille());
+        FormIntent.putExtra("Latitude",vuser.getLat());
+        FormIntent.putExtra("Longitude",vuser.getLon());
         startActivity(FormIntent);
     }
 

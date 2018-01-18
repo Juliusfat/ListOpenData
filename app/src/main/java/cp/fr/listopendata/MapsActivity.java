@@ -1,8 +1,7 @@
 package cp.fr.listopendata;
 
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,41 +10,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ViewActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private TextView salleView;
-    private TextView adresseView;
-    private TextView codeView;
-    private TextView villeView;
-
-    private double latitude;
-    private double longitude;
     private GoogleMap mMap;
-    private String nomsalle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view);
-
-        this.salleView = findViewById(R.id.nameSalle);
-        this.adresseView =findViewById(R.id.adresse);
-        this.codeView = findViewById(R.id.codepostal);
-        this.villeView = findViewById(R.id.ville);
-
-        Bundle extras = getIntent().getExtras();
-
-        salleView.setText(extras.getString("Nomsalle"));
-        adresseView.setText(extras.getString("Adresse"));
-        codeView.setText(extras.getString("CodePostal"));
-        villeView.setText(extras.getString("Ville"));
-        latitude = extras.getDouble("Latitude");
-        longitude = extras.getDouble("Longitude");
-        nomsalle = extras.getString("Nomsalle");
-
-
-
+        setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -67,8 +39,8 @@ public class ViewActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(latitude , longitude);
-        mMap.addMarker(new MarkerOptions().position(sydney).title(nomsalle));
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
