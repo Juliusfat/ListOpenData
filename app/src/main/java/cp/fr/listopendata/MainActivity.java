@@ -1,13 +1,20 @@
 package cp.fr.listopendata;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -22,13 +29,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private List<User> userList;
     private ListView userListView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -40,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         userList = responseToList(response);
         Adapter tacheAdapter = new Adapter(this, userList);
         userListView.setAdapter(tacheAdapter);
+
+
+        userListView.setOnItemSelectedListener(this);
 
         /*final RecyclerView rv = (RecyclerView) findViewById(R.id.list);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -93,18 +103,36 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject name = item.getJSONObject("fields");
                 user.setName(name.getString("insnom"));
                 user.setAdress(name.getString("inslibellevoie"));
-                user.setCodepostal(name.getInt("inscodepostal"));
+                user.setCodepostal(name.getString("inscodepostal"));
                 user.setVille(name.getString("comlib"));
                 user.setLat(50.0);
                 user.setLon(3.0);
                 //ajout de l'utilisateur à la liste
                 list.add(user);
 
-            }} catch(JSONException e){
-                e.printStackTrace();
             }
-            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return list;
     }
 
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        User vuser = userList.get(position);
+
+        Intent FormIntent = new Intent(this,ViewActivity.class);
+        FormIntent.putExtra("Nomsalle",vuser.getName());
+        FormIntent.putExtra("Adresse",vuser.getAdress());
+        FormIntent.putExtra("CodePostal",vuser.getCodepostal());
+        FormIntent.putExtra("Ville",vuser.getVille());
+        startActivity(FormIntent);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+}
 

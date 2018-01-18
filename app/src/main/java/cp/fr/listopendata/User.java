@@ -8,7 +8,7 @@ public class User {
 
     private String name;
     private String adress;
-    private int codepostal;
+    private String codepostal;
     private String ville;
     private Double lat;
     private Double lon;
@@ -17,7 +17,7 @@ public class User {
     }
 
 
-    public User(String name, String adress, int codepostal, String ville, Double lat, Double lon) {
+    public User(String name, String adress, String codepostal, String ville, Double lat, Double lon) {
         this.name = name;
         this.adress = adress;
         this.codepostal = codepostal;
@@ -61,11 +61,11 @@ public class User {
         this.adress = adress;
     }
 
-    public int getCodepostal() {
+    public String getCodepostal() {
         return codepostal;
     }
 
-    public void setCodepostal(int codepostal) {
+    public void setCodepostal(String codepostal) {
         this.codepostal = codepostal;
     }
 

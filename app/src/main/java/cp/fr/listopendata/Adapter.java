@@ -58,16 +58,7 @@ public class Adapter extends ArrayAdapter {
         TextView tachetextview = view.findViewById((R.id.name));
         tachetextview.setText(tachedata.getName());
 
-
         //Référence au bouton supprimer
-        Button infoButton = view.findViewById(R.id.button);
-        Button mapButton = view.findViewById(R.id.button2);
-
-        // On lui affecte un tag comportant la position de l'item afin de
-        // pouvoir le récupérer au clic de la checkbox
-
-        infoButton.setTag(position);
-        mapButton.setTag(position);
 
 
         return view;
