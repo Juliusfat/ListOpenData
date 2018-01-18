@@ -38,18 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private void processResponse(String response) {
         userListView = findViewById(R.id.taCheListView);
         userList = responseToList(response);
-        String[] data = new String[userList.size()];
-        for (int i = 0; i < userList.size(); i++) {
-            data[i] = userList.get(i).getName();
-        }
-
-        //definir un ArrayAdapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                data
-        );
-        userListView.setAdapter(adapter);
+        Adapter tacheAdapter = new Adapter(this, userList);
+        userListView.setAdapter(tacheAdapter);
 
         /*final RecyclerView rv = (RecyclerView) findViewById(R.id.list);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -57,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getDataFromHttp() {
-        String url = "https://opendata.lillemetropole.fr/api/records/1.0/search/?dataset=installation-sportives&facet=cominsee&facet=comlib";
+        String url = "https://opendata.lillemetropole.fr/api/records/1.0/search/?dataset=installation-sportives&facet=cominsee&facet=comlib&apikey=6953e7f77733a4906533bf4b9f7b9eabad490d23e85d272d838e4229";
 
         //Définition de la requête
         StringRequest request = new StringRequest(
