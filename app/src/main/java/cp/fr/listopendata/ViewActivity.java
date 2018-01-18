@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -70,5 +71,12 @@ public class ViewActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng sydney = new LatLng(latitude , longitude);
         mMap.addMarker(new MarkerOptions().position(sydney).title(nomsalle));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        CameraUpdate center=
+                CameraUpdateFactory.newLatLng(new LatLng(latitude,
+                        longitude));
+        CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
+
+        mMap.moveCamera(center);
+        mMap.animateCamera(zoom);
     }
 }
