@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
+    android:background="@color/colorPrimaryDark"
     android:orientation="horizontal">
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:layout_gravity="center_horizontal"
+        android:textColor="#FFFAF0"
         android:textAppearance="?android:attr/textAppearanceLarge"
         tools:text="Liste" ></TextView>
 
